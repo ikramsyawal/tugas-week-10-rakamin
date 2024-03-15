@@ -1,30 +1,60 @@
-const MovieService = require("../services/movieService");
+const movieService = require("../services/movieService");
 
 class MovieController {
+  // find all movies
   static findAll = async (req, res, next) => {
     try {
-      const movies = await MovieService.findAll();
+      const movies = await movieService.findAll();
       res.status(200).json(movies);
     } catch (err) {
       next(err);
     }
   };
 
+  // find one movie
   static findOne = async (req, res, next) => {
     try {
       const id = req.params.id;
-      const movie = await MovieService.findOne(id);
+      const movie = await movieService.findOne(id);
       res.status(200).json(movie);
     } catch (err) {
       next(err);
     }
   };
 
+  // create a movie
   static create = async (req, res, next) => {
     try {
       const bodyReq = req.body;
-      const movie = await MovieService.create(bodyReq);
-      res.status(201).json(movie);
+      const movie = await movieService.create(bodyReq);
+      res
+        .status(201)
+        .json({ message: "Movie created successfully", data: movie });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  // update a movie
+  static update = async (req, res, next) => {
+    try {
+      const params = {
+        id: req.params.id,
+        body: req.body,
+      };
+      const movie = await movieService.update(params);
+      res
+        .status(200)
+        .json({ message: "Movie updated successfully", data: movie });
+    } catch (err) {
+      next(err);
+    }
+  };
+  static destroy = async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      await movieService.destroy(id);
+      res.status(200).json({ message: "Movie deleted successfully" });
     } catch (err) {
       next(err);
     }
