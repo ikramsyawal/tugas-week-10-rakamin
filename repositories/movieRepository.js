@@ -21,6 +21,15 @@ class MovieRepository {
       throw { name: "errorNotFound", message: "Movie not found" };
     }
   };
+
+  static create = async (params) => {
+    try {
+      const movie = await Movie.create(params);
+      return movie;
+    } catch (err) {
+      throw { name: "badRequest", message: "Bad Request" };
+    }
+  };
 }
 
 module.exports = MovieRepository;

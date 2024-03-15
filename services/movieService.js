@@ -5,8 +5,8 @@ class MovieService {
     try {
       const movie = await movieRepository.findAll(params);
       return movie;
-    } catch (error) {
-      throw error;
+    } catch (err) {
+      throw err;
     }
   };
 
@@ -19,8 +19,17 @@ class MovieService {
       };
       const movie = await movieRepository.findOne(column);
       return movie;
-    } catch (error) {
-      throw error;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  static create = async (params) => {
+    try {
+      const movie = await movieRepository.create(params);
+      return movie;
+    } catch (err) {
+      throw err;
     }
   };
 }

@@ -19,6 +19,16 @@ class MovieController {
       next(err);
     }
   };
+
+  static create = async (req, res, next) => {
+    try {
+      const bodyReq = req.body;
+      const movie = await MovieService.create(bodyReq);
+      res.status(201).json(movie);
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 module.exports = MovieController;
