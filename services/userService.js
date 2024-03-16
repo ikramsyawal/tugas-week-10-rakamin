@@ -10,6 +10,31 @@ class UserService {
       throw err;
     }
   };
+
+  // get a user by id
+  static findOne = async (id) => {
+    try {
+      const filterOption = {
+        where: {
+          id,
+        },
+      };
+      const user = await userRepository.findOne(filterOption);
+      return user;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  // create a new user
+  static create = async (params) => {
+    try {
+      const user = await userRepository.create(params);
+      return user;
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 
 module.exports = UserService;
