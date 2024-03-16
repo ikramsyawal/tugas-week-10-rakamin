@@ -35,6 +35,30 @@ class UserService {
       throw err;
     }
   };
+
+  // update a user
+  static update = async (params) => {
+    try {
+      const { id, body } = params;
+      await userRepository.update(id, body);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  // delete a user
+  static destroy = async (id) => {
+    try {
+      const filterOption = {
+        where: {
+          id,
+        },
+      };
+      await userRepository.destroy(filterOption);
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 
 module.exports = UserService;
