@@ -40,7 +40,14 @@ class MovieRepository {
   // update a movie
   static update = async (id, body) => {
     try {
-      const movie = await Movie.findOne({ where: { id } });
+      if (!body.title && !body.genres && !body.year) {
+        throw { name: "badRequest", message: "Bad request" };
+      }
+      const movie = await Movie.findOne({
+        where: {
+          id,
+        },
+      });
       if (!movie) {
         throw { name: "errorNotFound", message: "Movie not found" };
       }
