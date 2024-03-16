@@ -59,6 +59,22 @@ class MovieService {
       throw err;
     }
   };
+
+  // upload an image
+  static uploadImage = async (file) => {
+    try {
+      if (!file) {
+        throw {
+          name: "missingFile",
+          message: "please choose image before uploading",
+        };
+      }
+      const url = `${process.env.BASE_URL}/api/images/${file.filename}`;
+      return url;
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 
 module.exports = MovieService;

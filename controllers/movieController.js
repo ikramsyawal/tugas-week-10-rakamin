@@ -50,11 +50,25 @@ class MovieController {
       next(err);
     }
   };
+
+  // delete a movie
   static destroy = async (req, res, next) => {
     try {
       const id = req.params.id;
       await movieService.destroy(id);
       res.status(200).json({ message: "Movie deleted successfully" });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  // upload an image
+  static uploadImage = async (req, res, next) => {
+    try {
+      const upload = await movieService.uploadImage(req.file);
+      res
+        .status(200)
+        .json({ message: "Image uploaded successfully", data: upload });
     } catch (err) {
       next(err);
     }
